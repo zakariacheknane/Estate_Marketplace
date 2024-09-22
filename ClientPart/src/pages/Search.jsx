@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export const Search = () => {
+    const navigate = useNavigate();
     const [sidebardata, setSidebardata] = useState({
         searchTerm: '',
         type: 'all',
@@ -44,7 +46,7 @@ export const Search = () => {
           setSidebardata({ ...sidebardata, sort, order });
         }
       };
-      
+
     const handleSubmit = (e) => {
         e.preventDefault();
         const urlParams = new URLSearchParams();
