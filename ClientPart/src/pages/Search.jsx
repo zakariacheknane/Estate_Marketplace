@@ -1,6 +1,15 @@
 import React from "react";
 
 export const Search = () => {
+    const [sidebardata, setSidebardata] = useState({
+        searchTerm: '',
+        type: 'all',
+        parking: false,
+        furnished: false,
+        offer: false,
+        sort: 'created_at',
+        order: 'desc',
+      });
   return (
     <div className="flex flex-col md:flex-row">
       <div className="p-7  border-b-2 md:border-r-2 md:min-h-screen">
