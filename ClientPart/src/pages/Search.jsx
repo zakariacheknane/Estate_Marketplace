@@ -9,7 +9,7 @@ export const Search = () => {
         parking: false,
         furnished: false,
         offer: false,
-        sort: 'created_at',
+        sort: 'createdAt',
         order: 'desc',
       });
       useEffect(() => {
