@@ -1,7 +1,26 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation } from 'swiper/modules';
+import SwiperCore from 'swiper';
+import 'swiper/css/bundle';
 
 export default function Home() {
+
+  const [offerListings, setOfferListings] = useState([]);
+  SwiperCore.use([Navigation]);
+  useEffect(() => {
+    const fetchOfferListings = async () => {
+      try {
+        const res = await fetch('/api/listing/get?offer=true&limit=4');
+        const data = await res.json();
+        setOfferListings(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchOfferListings();
+  }, []);
   return (
     <div>
        {/* top */}
@@ -24,6 +43,22 @@ export default function Home() {
           Let's get started...
         </Link>
       </div>
+      {/* swiper */}
+      <Swiper navigation>
+      {offerListings &&
+          offerListings.length > 0 && offerListings.map((listing) => (
+              <SwiperSlide >
+                <div
+                  className="h-[550px]"
+                  style={{
+                    background: `url(${listing.imageUrls[0]}) center no-repeat`,
+                    backgroundSize: "cover",
+                  }}
+                  key={listing._id}
+                ></div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
     </div>
   )
 }
